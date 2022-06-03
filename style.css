@@ -1,0 +1,28 @@
+
+body{
+	margin:auto;
+}
+
+#squareBox{
+	display:flex;
+	flex-direction:row;
+	flex-wrap: wrap;
+	padding:10px;	
+	background:blue;
+	margin:5%;
+}
+
+.container{
+	margin:auto;
+	border: red 2px solid;
+}
+
+.s{
+	width:40px;
+	height:40px;
+	margin-right:-1px;
+	font-size:9px;
+	text-align:center;
+	margin:auto;
+}
+
