@@ -1,37 +1,40 @@
+
 const squareBox = document.getElementById('squareBox')
 
-//board constructor
-var squares = []
-var boxes = []
+//board constructor function
+
 function inputsConstructor(horizontalBoard,verticalBoard){
 	
 	//reset elements
-	squares = []
-	boxes = []
+	let squares = []
+	let boxes = []
 	squareBox.innerHTML = ''
 
-	//create elements
+	////create elements
+	
 	//container Boxes
+	
+	let fragment = document.createDocumentFragment()
+
 	for(i=0;i<horizontalBoard*verticalBoard;i++){
 		boxes.push(document.createElement('div'))
 		boxes[i].classList.add('container')
 		boxes[i].style.width=horizontalBoard*41+'px';
 		boxes[i].style.height=verticalBoard*41+'px';
-		squareBox.appendChild(boxes[i]);
+		fragment.appendChild(boxes[i]);
 	}
+
+		squareBox.appendChild(fragment);
 
 
 	// individual elements
 	for(i=0;i<(horizontalBoard*verticalBoard)**2;i++){
 		squares.push(document.createElement('input'));
-		squares[i].classList.add('s')
+		squares[i].classList.add('square')
 	}
 	
 
-	//squares = document.getElementsByClassName('s')
-	
-
-	// vertical class added and color
+	// vertical class added and file color
 	let totalElements = 0
 	for(i=0;i<horizontalBoard*verticalBoard;i++){
 		for(l=0;l<horizontalBoard*verticalBoard;l++){
@@ -58,8 +61,16 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 		}
 	}
 	
+	
+	//Box class added for every individual element and all drawn in document
 
-	//Box Value
+	
+	fragment = [];
+
+	for(i=0;i<horizontalBoard*verticalBoard;i++){
+	fragment[i]= document.createDocumentFragment()
+	}
+
 	totalElements = 0
 	for(l=0;l<horizontalBoard;l++){
 		for(k=0;k<verticalBoard;k++){
@@ -68,26 +79,17 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 				      squares[totalElements].classList.add('B'+(j+l*verticalBoard));
 					squares[totalElements].value+='B'+(j+l*verticalBoard);
 					
-					boxes[j+(l*verticalBoard)].appendChild(squares[totalElements]);		
-					//squares[totalElements]
-
+					
+				     fragment[j+(l*verticalBoard)].appendChild(squares[totalElements]);		
 					totalElements++;
 				}
 			}
 		}
 	}
-
 	
-	//add elements to document
-	
-	/*
-
-	for(i=0;i<squares.length;i++){
-		if(squares[i].ClassList[3]=='b'+l){
-			boxes.push()	
-		}
+	for(i=0;i<horizontalBoard*verticalBoard;i++){
+		boxes[i].appendChild(fragment[i])
 	}
-*/
 
 	// add event listenrer for all elements
 	for(i=0;i<squares.length;i++){
@@ -102,9 +104,6 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 
 //repeated number errors logic
 
-
-
-
 function color(e){
 	console.log(e.target)
 	horizontal= document.getElementsByClassName(e.target.classList[1])
@@ -112,9 +111,9 @@ function color(e){
 	box = document.getElementsByClassName(e.target.classList[3])
 	
 
+	searchEquals(e,box)
 	searchEquals(e,horizontal)
 	searchEquals(e,vertical)
-	searchEquals(e,box)
 }
 
 function searchEquals(e,direction){
