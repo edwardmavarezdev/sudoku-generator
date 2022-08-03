@@ -9,18 +9,22 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 	let squares = []
 	let boxes = []
 	squareBox.innerHTML = ''
-
+	squareBox.style.width=parseInt(document.getElementsByTagName('body')[0].clientWidth*0.9+'px');
+		//60*horizontalBoard*verticalBoard+'px';
 	////create elements
 	
 	//container Boxes
 	
-	let fragment = document.createDocumentFragment()
-
+	fragment = document.createDocumentFragment()
+	
 	for(i=0;i<horizontalBoard*verticalBoard;i++){
 		boxes.push(document.createElement('div'))
 		boxes[i].classList.add('container')
-		boxes[i].style.width=horizontalBoard*41+'px';
-		boxes[i].style.height=verticalBoard*41+'px';
+		//console.log(squareBox.style.width)
+		//console.log(squareBox.clientWidth)
+		boxes[i].style.width=parseInt(squareBox.clientWidth/verticalBoard)-4+'px';
+		
+		//boxes[i].style.height=verticalBoard*41+'px';
 		fragment.appendChild(boxes[i]);
 	}
 
@@ -31,6 +35,8 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 	for(i=0;i<(horizontalBoard*verticalBoard)**2;i++){
 		squares.push(document.createElement('input'));
 		squares[i].classList.add('square')
+		squares[i].style.width =squareBox.children[0].clientWidth/horizontalBoard+'px'
+		squares[i].style.height =squareBox.children[0].clientWidth/horizontalBoard+'px'
 	}
 	
 
@@ -98,7 +104,6 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 
 	container = document.getElementsByClassName('container')
 	
-	squareBox.style.width=50*horizontalBoard*verticalBoard+'px'
 }
 
 
@@ -123,4 +128,10 @@ function searchEquals(e,direction){
 		}
 	}
 }
+
+//inputsConstructor(3,3)
+
+
+		console.log(squareBox.clientWidth)
+
 inputsConstructor(3,3)
