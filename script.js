@@ -55,7 +55,7 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 	for(i=0;i<horizontalBoard*verticalBoard;i++){
 		for(l=0;l<horizontalBoard*verticalBoard;l++){
 			squares[totalElements].classList.add('C'+l)
-			squares[totalElements].value+='C'+l
+			squares[totalElements].placeholder+='C'+l
 			if((i+l)%2==0){
 			squares[totalElements].style.background='white';
 			}
@@ -72,7 +72,7 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 	for(i=0;i<horizontalBoard*verticalBoard;i++){
 		for(l=0;l<horizontalBoard*verticalBoard;l++){
 			squares[totalElements].classList.add('F'+i)
-			squares[totalElements].value+='F'+i
+			squares[totalElements].placeholder+='F'+i
 			totalElements++
 		}
 	}
@@ -93,7 +93,7 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 			for(j=0;j<verticalBoard;j++){
 				for(i=0;i<horizontalBoard;i++){
 				      squares[totalElements].classList.add('B'+(j+l*verticalBoard));
-					squares[totalElements].value+='B'+(j+l*verticalBoard);
+					squares[totalElements].placeholder+='B'+(j+l*verticalBoard);
 					
 					
 				     fragment[j+(l*verticalBoard)].appendChild(squares[totalElements]);		
@@ -110,22 +110,29 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 	// add event listenrer for all elements
 	for(i=0;i<squares.length;i++){
 		squares[i].addEventListener('input' , color)
+		squares[i].addEventListener('click',onClickDeleteText)
 	}
 
 	container = document.getElementsByClassName('container')
 	
 }
 
+function onClickDeleteText(e){
+	
+	e.target.value = ''
+}
 
 //repeated number errors logic
 
 function color(e){
-	console.log(e.target)
+	
+	
+
 	horizontal= document.getElementsByClassName(e.target.classList[1])
 	vertical = document.getElementsByClassName(e.target.classList[2])
 	box = document.getElementsByClassName(e.target.classList[3])
 	
-
+	
 	searchEquals(e,box)
 	searchEquals(e,horizontal)
 	searchEquals(e,vertical)
@@ -134,8 +141,9 @@ function color(e){
 function searchEquals(e,direction){
 	for(i=0;i<direction.length;i++){
 		if(e.target.value == direction[i].value && e.target != direction[i]){
-			console.log('exist other same')
+			alert('error in '+e.target.placeholder+' same number at '+direction[i].placeholder)
 		}
+		else{}
 	}
 }
 
