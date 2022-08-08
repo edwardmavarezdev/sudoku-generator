@@ -3,6 +3,17 @@ body{
 	margin:auto;
 }
 
+.size{
+	width:40px;
+	margin-top:-15px;
+	margin-bottom:10px;
+	margin-right: 20px;
+}
+
+p{display:inline;
+}
+
+
 #squareBox{
 	display:flex;
 	flex-direction:row;

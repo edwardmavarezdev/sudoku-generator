@@ -1,6 +1,16 @@
 
 const squareBox = document.getElementById('squareBox')
 
+//button to create sudoku
+
+let applySize = document.getElementById('applySize');
+
+applySize.addEventListener('click', ()=>{
+	let horizontalSize = parseInt(document.getElementById('horizontalSize').value);
+	let verticalSize = parseInt(document.getElementById('verticalSize').value);
+	inputsConstructor(horizontalSize,verticalSize);
+});
+
 //board constructor function
 
 function inputsConstructor(horizontalBoard,verticalBoard){
@@ -9,7 +19,7 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 	let squares = []
 	let boxes = []
 	squareBox.innerHTML = ''
-	squareBox.style.width=parseInt(document.getElementsByTagName('body')[0].clientWidth*0.9+'px');
+	squareBox.style.width=parseInt(document.getElementsByTagName('body')[0].clientWidth*0.3+'px');
 		//60*horizontalBoard*verticalBoard+'px';
 	////create elements
 	
@@ -134,4 +144,3 @@ function searchEquals(e,direction){
 
 		console.log(squareBox.clientWidth)
 
-inputsConstructor(3,3)
