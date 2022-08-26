@@ -1,6 +1,37 @@
 
 body{
-	margin:auto;
+	margin:0
+}
+
+.center{
+	display:flex;
+	flex-direction:column;
+	height: 100vh;
+	align-items:center;
+	justify-content: center;
+}
+
+#squareBox{
+	background:blue;
+	margin: 2% auto;
+	justify-items:center;
+	width:72vmin;
+	height:72vmin;
+}
+
+
+.container{
+	outline: solid 2px red;
+	background-color:green;
+	justify-items:center;
+}
+
+.square{
+	width:8vmin;
+	height:8vmin;
+	margin-right:0px;
+	font-size:9px;
+	text-align:center;
 }
 
 .size{
@@ -10,29 +41,9 @@ body{
 	margin-right: 20px;
 }
 
-p{display:inline;
-}
 
-
-#squareBox{
-	display:flex;
-	flex-direction:row;
-	flex-wrap: wrap;
-	background:blue;
-	margin:5%;
-}
-
-.container{
-	border: solid 2px red;
-	background-color:green;
-}
-
-.square{
-	width:30px;
-	height:30px;
-	margin-right:0px;
-	font-size:9px;
-	text-align:center;
+p {
+	display:inline;
 }
 
 .ButtonsInput{

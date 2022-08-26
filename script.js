@@ -19,7 +19,12 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 	let squares = []
 	let boxes = []
 	squareBox.innerHTML = ''
-	squareBox.style.width=parseInt(document.getElementsByTagName('body')[0].clientWidth*0.3+'px');
+	
+	//style of squareBox
+	squareBox.style.display='grid';
+	squareBox.style.gridTemplateColumns='repeat('+verticalBoard+', 1fr)'
+
+	//	squareBox.style.width=parseInt(document.getElementsByTagName('body')[0].clientWidth*0.3+'px');
 		//60*horizontalBoard*verticalBoard+'px';
 	////create elements
 	
@@ -28,11 +33,11 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 	fragment = document.createDocumentFragment()
 	
 	for(i=0;i<horizontalBoard*verticalBoard;i++){
-		boxes.push(document.createElement('div'))
+	boxes.push(document.createElement('div'))
 		boxes[i].classList.add('container')
 		//console.log(squareBox.style.width)
 		//console.log(squareBox.clientWidth)
-		boxes[i].style.width=parseInt(squareBox.clientWidth/verticalBoard)-4+'px';
+		//boxes[i].style.width=parseInt(squareBox.clientWidth/verticalBoard)-4+'px';
 		
 		//boxes[i].style.height=verticalBoard*41+'px';
 		fragment.appendChild(boxes[i]);
@@ -45,8 +50,8 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 	for(i=0;i<(horizontalBoard*verticalBoard)**2;i++){
 		squares.push(document.createElement('input'));
 		squares[i].classList.add('square')
-		squares[i].style.width =squareBox.children[0].clientWidth/horizontalBoard+'px'
-		squares[i].style.height =squareBox.children[0].clientWidth/horizontalBoard+'px'
+		//squares[i].style.width =squareBox.children[0].clientWidth/horizontalBoard+'px'
+		//squares[i].style.height =squareBox.children[0].clientWidth/horizontalBoard+'px'
 	}
 	
 
@@ -60,7 +65,7 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 			squares[totalElements].style.background='white';
 			}
 			else{
-			squares[totalElements].style.background='grey';
+			squares[totalElements].style.background='#BFBBFF';
 			}
 			totalElements++
 		}
@@ -103,10 +108,15 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 		}
 	}
 	
+	//insert total elements separed by boxes in respective box
 	for(i=0;i<horizontalBoard*verticalBoard;i++){
 		boxes[i].appendChild(fragment[i])
-	}
+		boxes[i].style.display='grid';
+		boxes[i].style.gridTemplateColumns='repeat('+horizontalBoard+', 1fr)'
 
+
+	}
+	
 	// add event listenrer for all elements
 	for(i=0;i<squares.length;i++){
 		squares[i].addEventListener('input' , color)
@@ -152,3 +162,8 @@ function searchEquals(e,direction){
 
 		console.log(squareBox.clientWidth)
 
+setTimeout(()=>{
+	let horizontalSize = parseInt(document.getElementById('horizontalSize').value);
+	let verticalSize = parseInt(document.getElementById('verticalSize').value);
+	inputsConstructor(horizontalSize,verticalSize);
+},0)
