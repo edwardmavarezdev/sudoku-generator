@@ -24,9 +24,8 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 	squareBox.style.display='grid';
 	squareBox.style.gridTemplateColumns='repeat('+verticalBoard+', 1fr)'
 
-	//	squareBox.style.width=parseInt(document.getElementsByTagName('body')[0].clientWidth*0.3+'px');
-		//60*horizontalBoard*verticalBoard+'px';
-	////create elements
+
+	//create elements
 	
 	//container Boxes
 	
@@ -50,8 +49,8 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 	for(i=0;i<(horizontalBoard*verticalBoard)**2;i++){
 		squares.push(document.createElement('input'));
 		squares[i].classList.add('square')
-		//squares[i].style.width =squareBox.children[0].clientWidth/horizontalBoard+'px'
-		//squares[i].style.height =squareBox.children[0].clientWidth/horizontalBoard+'px'
+		squares[i].style.width = 87/(horizontalBoard*verticalBoard)+'vmin'
+		squares[i].style.height = 87/(horizontalBoard*verticalBoard)+'vmin'
 	}
 	
 
@@ -113,10 +112,9 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 		boxes[i].appendChild(fragment[i])
 		boxes[i].style.display='grid';
 		boxes[i].style.gridTemplateColumns='repeat('+horizontalBoard+', 1fr)'
-
-
 	}
 	
+
 	// add event listenrer for all elements
 	for(i=0;i<squares.length;i++){
 		squares[i].addEventListener('input' , color)

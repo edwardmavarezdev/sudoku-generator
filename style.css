@@ -1,22 +1,28 @@
 
 body{
-	margin:0
-}
-
-.center{
+	margin:0;
 	display:flex;
-	flex-direction:column;
-	height: 100vh;
 	align-items:center;
 	justify-content: center;
 }
 
+.center{
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+	justify-content: center;
+	margin:0;
+}
+
+	
+
 #squareBox{
 	background:blue;
-	margin: 2% auto;
 	justify-items:center;
-	width:72vmin;
-	height:72vmin;
+	width:87vmin;
+	height:87vmin;
+	margin:2% 0;
+
 }
 
 
@@ -34,18 +40,37 @@ body{
 	text-align:center;
 }
 
-.size{
-	width:40px;
-	margin-top:-15px;
-	margin-bottom:10px;
-	margin-right: 20px;
+
+.buttons, .size{
+	display: flex;
+	flex-direction: column;
+	margin: 1%;
 }
 
+.size input{
+	height:2rem;
+	width: 2rem;
+	margin:3%;
+}
+
+@media screen and (max-width: 575px){
+	.center{
+	flex-direction: column;
+	}
+
+	.buttons, .size{
+		flex-direction:row;	
+	}
+
+}
 
 p {
 	display:inline;
+	margin:auto;
 }
 
-.ButtonsInput{
+.Buttons Input{
+	width: 6.5vmin;
+	height: 6.5vmin;
 }
 
