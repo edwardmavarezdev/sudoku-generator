@@ -20,14 +20,14 @@ body{
 	background:blue;
 	justify-items:center;
 	width:87vmin;
-	height:87vmin;
+	height:86vmin;
 	margin:2% 0;
 
 }
 
 
 .container{
-	outline: solid 2px red;
+	outline: solid 3px #32f;
 	background-color:green;
 	justify-items:center;
 }
@@ -38,6 +38,12 @@ body{
 	margin-right:0px;
 	font-size:9px;
 	text-align:center;
+	border:solid 1px black;
+	font-size:100%;
+}
+
+.square:active{
+
 }
 
 
@@ -45,7 +51,15 @@ body{
 	display: flex;
 	flex-direction: column;
 	margin: 1%;
+	flex-wrap: wrap;
 }
+/*
+.square:focus{
+	border:solid red 2px;
+	outline:none;
+	background-color: blue;
+}
+*/
 
 .size input{
 	height:2rem;
@@ -53,7 +67,7 @@ body{
 	margin:3%;
 }
 
-@media screen and (max-width: 575px){
+@media screen and (max-width: 625px){
 	.center{
 	flex-direction: column;
 	}
@@ -73,4 +87,3 @@ p {
 	width: 6.5vmin;
 	height: 6.5vmin;
 }
-
