@@ -1,27 +1,41 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset = "UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="style.css">
 		<title>Sudoku Generator</title>
 	</head> 
 	<body>
-		<div class='center'>
-			<div id = squareBox></div>	
+	<div class='squareBox__container-space'>
+		<div class='squareBox__container'>
 
-			<div class = buttons id ='buttons'>
-			</div>
+			<div id = 'squareBox'></div>	
+
+			<div class = 'buttons' id ='buttons'></div>
+
 			<div class='size'>
-				<p>Horizontal Size</p>
-				<input type='number' id='horizontalSize' value='3' />
-				
-				<p>Vertical Size</p>
-				<input type='number' id='verticalSize' value='3' />
-				
+				<p>Select Sudoku Size</p>
 
+				<p class = 'horizontalTitle'>Horizontal</p>
+				<div class='selectionButtons'>
+					<input id= 'horizontalDown' class='down' type = 'button' value='Down'>
+                                	<div id = 'horizontalSize'></div >
+                                	<input id = 'horizontalUp' class='up' type = 'button' value='Up'>
+				</div>
+
+				<p class = 'verticalTitle'>Vertical</p>
+				<div class='selectionButtons'>
+                                	<input id= 'verticalDown' class='down' type = 'button' value='Down'/>
+                                	<div id = 'verticalSize'></div>
+                                	<input id = 'verticalUp' class='up' type = 'button' value='Up'/>
+				</div>
 				<input type='button' id='applySize' value='apply Size' />
 			</div>
+			
+			<div class='X'></div>
 		</div>
+	</div>
 		<script src="script.js"></script>
 	</body>
 

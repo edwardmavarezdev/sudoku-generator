@@ -10,9 +10,14 @@ const buttonsBox = document.getElementById('buttons')
 let applySize = document.getElementById('applySize');
 
 //size data input
-applySize.addEventListener('click', ()=>{
-	let horizontalSize = parseInt(document.getElementById('horizontalSize').value);
-	let verticalSize = parseInt(document.getElementById('verticalSize').value);
+applySize.addEventListener('click',()=>{
+	let horizontalSize = parseInt(document.getElementById('horizontalSize').innerHTML);
+	let verticalSize = parseInt(document.getElementById('verticalSize').innerHTML);
+	
+	squareBox.style.display ='';
+	buttonsBox.style.display ='';
+	size.style.display='none';
+
 	inputsConstructor(horizontalSize,verticalSize);
 });
 
@@ -31,7 +36,9 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 	//style of squareBox
 	squareBox.style.display='grid';
 	squareBox.style.gridTemplateColumns='repeat('+verticalBoard+', 1fr)'
-
+	let squareBoxSize = 87;
+	squareBox.style.width = squareBoxSize+'vmin';
+	squareBox.style.height = squareBoxSize+'vmin';
 
 	//create elements
 	
@@ -59,8 +66,8 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 		squares.push(document.createElement('input'));
 		squares[i].type=('button')
 		squares[i].classList.add('square')
-		squares[i].style.width = 87/(horizontalBoard*verticalBoard)+'vmin'
-		squares[i].style.height = 87/(horizontalBoard*verticalBoard)+'vmin'
+		squares[i].style.width = squareBoxSize/(horizontalBoard*verticalBoard)+'vmin'
+		squares[i].style.height = squareBoxSize/(horizontalBoard*verticalBoard)+'vmin'
 	}
 	
 
@@ -71,12 +78,11 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 			squares[totalElements].classList.add('C'+l)
 			//squares[totalElements].placeholder+='C'+l
 			if((i+l)%2==0){
-			squares[totalElements].style.background='white';
+			squares[totalElements].classList.add('parBackground');
 			}
 			else{
-			squares[totalElements].style.background='#ba9bff';
+			squares[totalElements].classList.add('imparBackground');
 			}
-					
 			totalElements++
 		}
 	}
@@ -128,8 +134,6 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 
 	// add event listeners for all elements in sudoku
 	for(i=0;i<squares.length;i++){
-		squares[i].addEventListener('input' , error)
-		squares[i].addEventListener('click',onClickDeleteText)
 
 		squares[i].addEventListener('focus',(e)=>{
 			e.target.style.backgroundImage='linear-gradient(#ff8,#ff8)';
@@ -150,7 +154,7 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 	let numbers = [];
 
 	//create buttons
-	for(i=0;i<horizontalBoard*verticalBoard;i++){
+	for(i=0;i<horizontalBoard*verticalBoard+1;i++){
 		numbers.push(document.createElement('input'));
 		numbers[i].classList.add('number-'+i);
 		numbers[i].type='button';
@@ -161,9 +165,9 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 	
 
 	// add event listeners for all number Buttons
-	// number value definition
-	let values = [1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-	for(i=0;i<horizontalBoard*verticalBoard;i++){
+	// number value definitioN
+	let values = ['',1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+	for(i=0;i<horizontalBoard*verticalBoard+1;i++){
 
 		buttonsBox.children[i].value=values[i];
 		buttonsBox.children[i].addEventListener('click',(e)=>{
@@ -174,36 +178,164 @@ function inputsConstructor(horizontalBoard,verticalBoard){
 			}
 		});
 	}
-
-
 }
 
-function onClickDeleteText(e){
-	
-	e.target.value = ''
-}
 
 //repeated number errors logic
 
-function error(e){
+function error(item){
 
-	horizontal= document.getElementsByClassName(e.classList[1])
-	vertical = document.getElementsByClassName(e.classList[2])
-	box = document.getElementsByClassName(e.classList[3])
+	horizontal= document.getElementsByClassName(item.classList[1])
+	vertical = document.getElementsByClassName(item.classList[3])
+	box = document.getElementsByClassName(item.classList[4])
 	
-	searchEquals(e,box)
-	searchEquals(e,horizontal)
-	searchEquals(e,vertical)
+	searchEquals(item,box)
+	searchEquals(item,horizontal)
+	searchEquals(item,vertical)
+
+	//error check
+	
+	allD=false;
+
+	if(errors.length>0){
+		for(i=0;i<errors.length;i++){
+			if(item.value == errors[i].value && item != errors[i]){
+				
+			}else if(item.value != errors[i].value && item != error){allD=true};
+			if(allD==true){
+				console.log(allD);
+				item.style.background='white';
+			
+				errors = errors.filter(error=>{
+					if(error!=item){
+						
+					}
+				})
+			}
+
+			/*for(j=0;j<errors.length;j++){
+				if(errors[i].value == errors[j].value && errors[i]!=errors[j]){
+				
+				}
+			}*/
+		}
+	}
+
 }
 
-function searchEquals(e,direction){
+let errors=[];
+
+function searchEquals(item,direction){
 	for(i=0;i<direction.length;i++){
-		if(e.value == direction[i].value && e != direction[i]){
-			alert('error in '+e.placeholder+' same number at '+direction[i].placeholder)
-		}
-		else{}
+		if(item.value == direction[i].value && item != direction[i] && item.value!=''){
+			item.style.background='red';
+			direction[i].style.background='red';
+			errors.push(item);
+			errors.push(direction[i]);
+			
+			//remove duplicates
+			errors = errors.filter(function(item, pos, self) {
+ 				return self.indexOf(item) == pos;
+			})
+
+		}else{}
+	}/*
+	if(item.classList[2]=='parBackground'){
+		item.style.background='white';
+	}else{
+		item.style.background='#ba9bff';
 	}
+	let index = errors.indexOf(item);
+	if (index > -1){
+		errors.splice(index, 1);
+	}*/
+
 }
+
+//register errors
+
+//initial state
+
+const size = document.querySelector('.size');
+
+//return to initial state
+
+const selectAgain = document.querySelector('.X');
+selectAgain.addEventListener('click',initialState)
+
+function initialState(){
+	squareBox.style.display ='none';
+	buttonsBox.style.display ='none';
+	size.style.display='';
+}
+
+initialState()
+
+
+
+//change values
+//speed
+const horizontalNumber = document.getElementById('horizontalSize')
+horizontalNumber.innerHTML=3;
+let horizontalUp = document.getElementById('horizontalUp');
+const horizontalDown = document.getElementById('horizontalDown');
+
+
+
+
+//frequency
+const verticalSize = document.getElementById('verticalSize')
+verticalSize.innerHTML=3;
+const verticalUp = document.getElementById('verticalUp');
+const verticalDown = document.getElementById('verticalDown');
+
+
+//speed Events Buttons
+horizontalUp.addEventListener('click',()=>{
+        horizontalNumber.innerHTML = parseInt(horizontalNumber.innerHTML)+1;
+        changeHorizontal();
+});
+
+horizontalDown.addEventListener('click',()=>{
+        horizontalNumber.innerHTML = parseInt(horizontalNumber.innerHTML)-1;
+        changeHorizontal();
+});
+
+
+//frequency Events Buttons
+verticalUp.addEventListener('click',()=>{
+        verticalSize.innerHTML = parseInt(verticalSize.innerHTML)+1;
+        changeVertical();
+});
+
+verticalDown.addEventListener('click',()=>{
+        verticalSize.innerHTML = parseInt(verticalSize.innerHTML)-1;
+        changeVertical();
+});
+
+
+
+function changeHorizontal(){
+
+        if(parseInt(horizontalNumber.innerHTML)<1){
+                horizontalNumber.innerHTML=1;
+        } else if(parseInt(horizontalNumber.innerHTML)>5){
+                horizontalNumber.innerHTML=5;
+        }else{}
+}
+
+function changeVertical(){
+
+        if(parseInt(verticalSize.innerHTML)<1){
+                verticalSize.innerHTML=1;
+        } else if(parseInt(verticalSize.innerHTML)>5){
+                verticalSize.innerHTML=5;
+        }else{}
+}
+
+
+
+
 /*
 
 // buttons functionality
@@ -219,9 +351,11 @@ n1.addEventListener('click',()=>{
 
 
 
-/*
+
 setTimeout(()=>{
 	let horizontalSize = parseInt(document.getElementById('horizontalSize').value);
 	let verticalSize = parseInt(document.getElementById('verticalSize').value);
 	inputsConstructor(horizontalSize,verticalSize);
-},0)*/
+},0)
+
+*/

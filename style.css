@@ -1,12 +1,14 @@
 
-body{
+.squareBox__container-space{
 	margin:0;
 	display:flex;
 	align-items:center;
 	justify-content: center;
+	position:relative;
+	min-height:96vh;
 }
 
-.center{
+.squareBox__container{
 	display:flex;
 	flex-direction:row;
 	align-items:center;
@@ -19,61 +21,94 @@ body{
 #squareBox{
 	background:blue;
 	justify-items:center;
-	width:87vmin;
-	height:86vmin;
+	width:80vmin;
+	height:79vmin;
 	margin:2% 0;
-
 }
 
 
 .container{
-	outline: solid 3px #32f;
+	outline: solid 4px #32f;
 	background-color:green;
 	justify-items:center;
+	align-items: center;
 }
 
 .square{
-	width:8vmin;
-	height:8vmin;
 	margin-right:0px;
-	font-size:9px;
 	text-align:center;
 	border:solid 1px black;
-	font-size:100%;
+	font-size:100;
 }
 
-.square:active{
-
+.parBackground{
+	background-color: white;
 }
 
+.imparBackground{
+	background-color:#ba9bff;
+}
 
 .buttons, .size{
 	display: flex;
 	flex-direction: column;
 	margin: 1%;
 	flex-wrap: wrap;
+	align-items:center;
+	justify-content:center;
 }
-/*
-.square:focus{
-	border:solid red 2px;
-	outline:none;
+
+
+
+.buttons{
+	background-color:red;
+	align-items:center;
+	justify-content:center;
+	max-height:80vmin;
+	max-width: 33vmin;
+}
+
+.buttons input{
+	width:6vmin;
+	height:6vmin;
+}
+
+.size p{
+	width:5rem;
 	background-color: blue;
+	text-align:center;
 }
-*/
 
-.size input{
-	height:2rem;
-	width: 2rem;
+.selectionButtons{
+		display:flex;
+		flex-direction:row;
+		align-items:center;
+	}
+
+.selectionButtons div, .selectionButtons input{
+	height:4rem;
+	width:4rem;
 	margin:3%;
+	text-align:center;
+	font-size: 1.2rem;
 }
 
-@media screen and (max-width: 625px){
-	.center{
+.selectionButtons div{
+	font-size:3.5rem;
+	outline: solid blue 2px;
+}
+
+
+@media only screen and (max-width: 625px) {	
+	
+	.squareBox__container{
 	flex-direction: column;
 	}
 
-	.buttons, .size{
-		flex-direction:row;	
+	.buttons{
+	/*	width:78vmin;
+		height: 20vmin;
+	*/	flex-direction:row;	
 	}
 
 }
@@ -86,4 +121,13 @@ p {
 .Buttons Input{
 	width: 6.5vmin;
 	height: 6.5vmin;
+}
+
+.X{
+	width:100px;
+	height:100px;
+	background-color:green;
+	position: absolute;
+	top:0;
+	left:0;
 }
